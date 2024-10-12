@@ -12,10 +12,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Minify json files
         run: |
+          mkdir -p minified
           find . -type f -name "*.json" | while read -r json_file; do
-              filename=$(basename "$relative_path")
+              filename=$(basename "$json_file")
               jq -c . "$json_file" > "minified/$filename"
           done
       
