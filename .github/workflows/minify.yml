@@ -19,9 +19,8 @@ jobs:
         run: |
           mkdir -p minified
           find . -type f -name "*.json" | while read -r json_file; do
-              filename=$(basename "$json_file")
-              echo "Minify $filename"
-              jq -c . "$json_file" > "minified/$filename"
+              echo "Minify $json_file"
+              jq -c . "$json_file" > "minified/$json_file"
           done
       
       - name: Zip Release
