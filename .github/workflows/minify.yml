@@ -12,10 +12,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install JSON minifier
-        run: sudo apt install -y jq
-          
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.7.6
         with:
