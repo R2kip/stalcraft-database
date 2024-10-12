@@ -21,11 +21,7 @@ jobs:
         with:
           filename: "database-minified.zip"
           directory: "minified"
-          command: |
-            find . -type f -name "*.json" | while read -r json_file; do
-                filename=$(basename "$relative_path")
-                jq -c . "$json_file" > "minified/$filename"
-            done
+          command: 'find . -type f -name "*.json" | while read -r json_file; do; filename=$(basename "$relative_path"); jq -c . "$json_file" > "minified/$filename"; done'
                   
       - name: Upload Release
         uses: ncipollo/release-action@v1.12.0
