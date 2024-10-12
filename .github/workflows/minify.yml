@@ -9,15 +9,18 @@ on:
 jobs:
   minify_and_release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Minify json files
         run: |
           mkdir -p minified
           find . -type f -name "*.json" | while read -r json_file; do
               filename=$(basename "$json_file")
+              echo "Minify $filename"
               jq -c . "$json_file" > "minified/$filename"
           done
       
