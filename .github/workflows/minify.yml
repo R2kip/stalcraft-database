@@ -20,6 +20,7 @@ jobs:
           mkdir -p minified
           find . -type f -name "*.json" | while read -r json_file; do
               echo "Minify $json_file"
+              mkdir -p $(dirname "$json_file")
               jq -c . "$json_file" > "minified/$json_file"
           done
       
