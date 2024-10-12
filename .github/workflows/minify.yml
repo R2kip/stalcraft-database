@@ -19,7 +19,6 @@ jobs:
         run: |
           mkdir -p minified
           find . -type f -name "*.json" | while read -r json_file; do
-              echo "Minify $json_file"
               mkdir -p "minified/${json_file%/*}"
               jq -c . "$json_file" > "minified/$json_file"
           done
@@ -35,4 +34,5 @@ jobs:
         with:
           artifacts: "database-minified.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.event.head_commit.id }}
 
