@@ -12,13 +12,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Minify json files
+        run: |
+          find . -type f -name "*.json" | while read -r json_file; do
+              filename=$(basename "$relative_path")
+              jq -c . "$json_file" > "minified/$filename"
+          done
+      
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.7.6
         with:
           filename: "database-minified.zip"
           directory: "minified"
-          command: 'find . -type f -name "*.json" | while read -r json_file; do; filename=$(basename "$relative_path"); jq -c . "$json_file" > "minified/$filename"; done'
-                  
+ 
       - name: Upload Release
         uses: ncipollo/release-action@v1.12.0
         with:
